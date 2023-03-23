@@ -18,15 +18,15 @@ export function TaskProvider ({ children }) {
     const tasks = items && JSON.parse(items)
     tasks && setTasks(tasks)
   }, [])
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
   const createTask = (title, description) => {
     const newTask = { id: uuid(), title, description }
     setTasks([...tasks, newTask])
   }
   const deleteTask = (id) => setTasks([...tasks.filter(task => task.id !== id)])
   const updateTask = (id, newTask) => setTasks([...tasks.map(t => t.id === id ? { ...t, ...newTask } : t)])
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks))
-  }, [tasks])
 
   return (
     <TaskContext.Provider

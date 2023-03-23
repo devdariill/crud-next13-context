@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation'
 import { PropTypes } from 'prop-types'
 
-Card.PropTypes = {
+Card.propTypes = {
   task: PropTypes.object.isRequired
 }
 

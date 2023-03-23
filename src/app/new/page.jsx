@@ -1,8 +1,10 @@
 'use client'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useTasks } from '../../context/TaskContext'
 
 function Page () {
+  const router = useRouter()
   const { createTask } = useTasks()
   const [task, setTask] = useState()
   const handleChange = (e) =>
@@ -11,6 +13,7 @@ function Page () {
     e.preventDefault()
     createTask(task.title, task.description)
     console.log(task)
+    router.push('/')
   }
 
   return (

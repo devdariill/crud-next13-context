@@ -1,5 +1,6 @@
 'use client'
 import { createContext, useContext, useState } from 'react'
+import { v4 as uuid } from 'uuid'
 
 export const TaskContext = createContext()
 
@@ -17,7 +18,7 @@ export function TaskProvider ({ children }) {
     { id: 3, title: 'my third task', description: 'description 3' }])
 
   const createTask = (title, description) => {
-    const newTask = { id: tasks.length + 1, title, description }
+    const newTask = { id: uuid(), title, description }
     setTasks([...tasks, newTask])
   }
 

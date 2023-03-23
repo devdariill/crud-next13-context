@@ -12,7 +12,12 @@ export function useTasks () {
   return context
 }
 export function TaskProvider ({ children }) {
-  const [tasks, setTasks] = useState(() => localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : [])
+  const [tasks, setTasks] = useState([])
+  useEffect(() => {
+    const items = localStorage.getItem('tasks')
+    const tasks = items && JSON.parse(items)
+    tasks && setTasks(tasks)
+  }, [])
   const createTask = (title, description) => {
     const newTask = { id: uuid(), title, description }
     setTasks([...tasks, newTask])

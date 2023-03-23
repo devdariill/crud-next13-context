@@ -1,4 +1,5 @@
 import './globals.css'
+import { TaskProvider } from '../context/TaskContext'
 
 export const metadata = {
   title: 'Create Next App',
@@ -8,7 +9,12 @@ export const metadata = {
 export default function RootLayout ({ children }) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <body>
+        <h1>Navigation</h1>
+        <TaskProvider>
+          {children}
+        </TaskProvider>
+      </body>
     </html>
   )
 }

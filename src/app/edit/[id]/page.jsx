@@ -6,7 +6,7 @@ Page.PropTypes = {
 
 function Page ({ params }) {
   return (
-    <div>Edit {params.id}</div>
+    <div>Editing {params.id}</div>
   )
 }
 export default Page

@@ -6,7 +6,7 @@ export default function Home () {
   return (
     <>
       <main>Holi</main>
-      <section className='gap-5 grid'>
+      <section className='gap-5 flex flex-col items-center'>
         {
         tasks.map((task) => (
           <Card key={task.id} task={task} />

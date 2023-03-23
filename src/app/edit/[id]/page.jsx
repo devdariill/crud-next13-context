@@ -1,12 +1,3 @@
-import { PropTypes } from 'prop-types'
+import Form from '../../new/page'
 
-Page.PropTypes = {
-  id: PropTypes.string.isRequired
-}
-
-function Page ({ params }) {
-  return (
-    <div>Editing {params.id}</div>
-  )
-}
-export default Page
+export default Form

@@ -11,7 +11,10 @@ export function useTasks () {
   return context
 }
 export function TaskProvider ({ children }) {
-  const tasks = [1, 2, 3]
+  const tasks = [
+    { id: 1, title: 'my first task', description: 'description 1' },
+    { id: 2, title: 'my second task', description: 'description 2' },
+    { id: 3, title: 'my third task', description: 'description 3' }]
   return (
     <TaskContext.Provider
       value={{ tasks }}

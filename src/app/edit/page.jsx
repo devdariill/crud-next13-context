@@ -5,7 +5,7 @@ function Page () {
   console.log(tasks)
 
   return (
-    <div>Edit {tasks}</div>
+    <div>Edit {tasks.length}</div>
   )
 }
 export default Page

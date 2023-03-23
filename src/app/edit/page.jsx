@@ -1,11 +1,11 @@
 'use client'
 import { useTasks } from '../../context/TaskContext'
 function Page () {
-  const values = useTasks()
-  console.log(values)
+  const { tasks } = useTasks()
+  console.log(tasks)
 
   return (
-    <div>Edit</div>
+    <div>Edit {tasks}</div>
   )
 }
 export default Page

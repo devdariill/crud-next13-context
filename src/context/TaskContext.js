@@ -13,7 +13,9 @@ export function useTasks () {
 export function TaskProvider ({ children }) {
   const tasks = [1, 2, 3]
   return (
-    <TaskContext.Provider value={tasks}>
+    <TaskContext.Provider
+      value={{ tasks }}
+    >
       {children}
     </TaskContext.Provider>
   )

@@ -17,7 +17,8 @@ function Card ({ task }) {
         className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
         onClick={(e) => {
           e.stopPropagation()
-          deleteTask(task.id)
+          const confirm = window.confirm('Are you sure you want to delete this task?')
+          confirm && deleteTask(task.id)
         }}
       >Delete
       </button>

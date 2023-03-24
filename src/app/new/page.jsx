@@ -16,8 +16,9 @@ function Page ({ params }) {
   //   description: ''
   // })
   const onSubmit = handleSubmit((data) => {
-    params.id ? updateTask(params.id, data) : createTask(data.title, data.description)
-    toast('Task saved')
+    params.id
+      ? updateTask(params.id, data, toast.success('Task updated'))
+      : createTask(data.title, data.description, toast('Task saved'))
     router.push('/')
   })
   // const handleChange = (e) =>

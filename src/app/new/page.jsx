@@ -1,20 +1,20 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useTasks } from '../../context/TaskContext'
 import { useForm } from 'react-hook-form'
 
 function Page ({ params }) {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm()
   console.log(params)
   const router = useRouter()
   const { tasks, createTask, updateTask } = useTasks()
-  const [task, setTask] = useState({
-    title: '',
-    description: ''
-  })
+  // const [task, setTask] = useState({
+  //   title: '',
+  //   description: ''
+  // })
   const onSubmit = handleSubmit((data) => {
-    params.id ? updateTask(params.id, task) : createTask(task.title, task.description)
+    params.id ? updateTask(params.id, data) : createTask(data.title, data.description)
     router.push('/')
   })
   // const handleChange = (e) =>
@@ -27,13 +27,19 @@ function Page ({ params }) {
   useEffect(() => {
     if (params.id) {
       const task = tasks.find(t => t.id === params.id)
-      task && setTask({ title: task.title, description: task.description })
+      task && setValue('title', task.title)
+      task && setValue('description', task.description)
+      // task && setTask({ title: task.title, description: task.description })
     }
-  }, [params.id, tasks])
+  }, [params.id, tasks, setValue])
   return (
     <form className='grid' onSubmit={onSubmit}>
       <input {...register('title', { required: true })} />
+      {errors.title &&
+        <span>This field is required</span>}
       <textarea {...register('description', { required: true })} />
+      {errors.description &&
+        <span>This field is required</span>}
       <button>Save</button>
     </form>
   )

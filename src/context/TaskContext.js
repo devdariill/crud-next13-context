@@ -1,7 +1,7 @@
 'use client'
 import { createContext, useContext } from 'react'
 import { v4 as uuid } from 'uuid'
-import { useLocalStorage } from '../hooks/useLocaleStorage'
+import useLocalStorage from '../hooks/useLocaleStorage'
 
 export const TaskContext = createContext()
 

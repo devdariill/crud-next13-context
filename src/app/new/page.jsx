@@ -2,8 +2,10 @@
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useTasks } from '../../context/TaskContext'
+import { useForm } from 'react-hook-form'
 
 function Page ({ params }) {
+  const { register, handleSubmit } = useForm()
   console.log(params)
   const router = useRouter()
   const { tasks, createTask, updateTask } = useTasks()
@@ -11,13 +13,17 @@ function Page ({ params }) {
     title: '',
     description: ''
   })
-  const handleChange = (e) =>
-    setTask({ ...task, [e.target.name]: e.target.value })
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const onSubmit = handleSubmit((data) => {
     params.id ? updateTask(params.id, task) : createTask(task.title, task.description)
     router.push('/')
-  }
+  })
+  // const handleChange = (e) =>
+  //   setTask({ ...task, [e.target.name]: e.target.value })
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   params.id ? updateTask(params.id, task) : createTask(task.title, task.description)
+  //   router.push('/')
+  // }
   useEffect(() => {
     if (params.id) {
       const task = tasks.find(t => t.id === params.id)
@@ -25,9 +31,9 @@ function Page ({ params }) {
     }
   }, [params.id, tasks])
   return (
-    <form className='grid' onSubmit={handleSubmit}>
-      <input name='title' type='text' placeholder='Title' onChange={handleChange} value={task.title} />
-      <textarea name='description' placeholder='Description' onChange={handleChange} value={task.description} />
+    <form className='grid' onSubmit={onSubmit}>
+      <input {...register('title', { required: true })} />
+      <textarea {...register('description', { required: true })} />
       <button>Save</button>
     </form>
   )
